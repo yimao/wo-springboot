@@ -1,0 +1,25 @@
+variables:
+  MAVEN_CLI_OPTS: "-DskipTests --batch-mode --errors --fail-at-end --show-version"
+
+package-jdk17:
+  stage: package-check
+  tags:
+    - maven
+  image: maven:3.9.9-eclipse-temurin-17
+  script:
+    - "mvn $MAVEN_CLI_OPTS clean package"
+  allow_failure: false
+
+dependency-check-jdk17:
+  stage: cve-check
+  tags:
+    - maven
+    - dependency-check
+  image: maven:3.9.9-eclipse-temurin-17
+  script:
+    - "mvn $MAVEN_CLI_OPTS clean compile org.owasp:dependency-check-maven:check"
+  allow_failure: true
+
+stages:
+  - package-check
+  - cve-check

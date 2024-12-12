@@ -1,0 +1,33 @@
+{
+  "type": "compact",
+  "dataSource": "<DATASOURCE>",
+  "granularitySpec": {
+    "type": "uniform",
+    "segmentGranularity": "SIX_HOUR",
+    "queryGranularity": "HOUR",
+    "intervals": [
+      "<INTERVAL>"
+    ]
+  },
+  "tuningConfig": {
+    "type": "index_parallel",
+    "maxNumConcurrentSubTasks": 3,
+    "forceGuaranteedRollup": "true",
+    "partitionsSpec": {
+      "type": "hash",
+      "partitionDimensions": [
+        "<__cube>",
+        "<xxx_id>"
+      ],
+      "targetRowsPerSegment": 3000000
+    }
+  },
+  "ioConfig": {
+    "type": "compact",
+    "inputSpec": {
+      "type": "interval",
+      "interval": "<INTERVAL>"
+    },
+    "appendToExisting": false
+  }
+}

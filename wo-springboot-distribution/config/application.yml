@@ -1,0 +1,30 @@
+#
+# application
+spring.application.name: hello-world
+#
+# server
+server.port: 8080
+server.servlet.context-path: /
+server.tomcat.basedir: tomcat
+#
+# actuator
+management.server.port: 8081
+management.endpoints.web.base-path: /actuator
+#
+# spring security
+spring.security.user.name: admin
+spring.security.user.password: "{bcrypt}$2y$05$ThCznak4WVfGXBqLIoO1IenzRCVsbazv.hRIfVXE6hcLxVOOcNX9e"
+spring.security.ignored-url: /,/index.html,/robots.txt,/error,/actuator/**,/captcha.jpg
+#
+# log
+logging.file.name: ./logs/${spring.application.name}.log
+logging.file.access-name: ./logs/${spring.application.name}-access.log
+logging.logback.rollingpolicy.file-name-pattern: ${logging.file.name}.%d{yyyyMMdd}.%i
+logging.logback.rollingpolicy.clean-history-on-start: true
+logging.logback.rollingpolicy.max-file-size: 100MB
+logging.logback.rollingpolicy.max-history: 30
+logging.logback.rollingpolicy.total-size-cap: 10GB
+# log level
+logging.level.root: info
+logging.level.access: trace
+logging.level.com.mudcode: debug

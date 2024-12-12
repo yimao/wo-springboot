@@ -1,0 +1,8 @@
+# spring
+spring.main.banner-mode: off
+spring.application.name: "wo-springboot-cli"
+# logging
+logging.file.name: ./logs/${spring.application.name}.log
+# logging.level
+logging.level.root: info
+logging.level.com.mudcode: debug

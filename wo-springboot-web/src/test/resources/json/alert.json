@@ -1,0 +1,46 @@
+{
+  "receiver": "nbs-dev-receiver",
+  "status": "firing",
+  "alerts": [
+    {
+      "status": "firing",
+      "labels": {
+        "alertname": "实例重启",
+        "application": "common-redirect-server",
+        "customer": "nbs-dev",
+        "instance": "10.128.2.95:7071",
+        "job": "common-redirect-server",
+        "product": "common",
+        "prom_role": "nbs-dev",
+        "severity": "warning"
+      },
+      "annotations": {
+        "summary": "common-redirect-server[10.128.2.95:7071] 实例重启"
+      },
+      "startsAt": "2022-04-29T08:57:47.536Z",
+      "endsAt": "0001-01-01T00:00:00Z",
+      "generatorURL": "http://192.168.5.182:9090/graph?g0.expr=time%28%29+-+process_start_time_seconds+%3C+90&g0.tab=1",
+      "fingerprint": "0f55bc81a836f73c"
+    }
+  ],
+  "groupLabels": {
+    "alertname": "实例重启"
+  },
+  "commonLabels": {
+    "alertname": "实例重启",
+    "application": "common-redirect-server",
+    "customer": "nbs-dev",
+    "instance": "10.128.2.95:7071",
+    "job": "common-redirect-server",
+    "product": "common",
+    "prom_role": "nbs-dev",
+    "severity": "warning"
+  },
+  "commonAnnotations": {
+    "summary": "common-redirect-server[10.128.2.95:7071] 实例重启"
+  },
+  "externalURL": "http://10.1.0.1:9093",
+  "version": "4",
+  "groupKey": "{}/{prom_role=\"nbs-dev\"}:{alertname=\"实例重启\"}",
+  "truncatedAlerts": 0
+}

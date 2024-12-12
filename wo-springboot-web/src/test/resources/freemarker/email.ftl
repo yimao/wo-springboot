@@ -1,0 +1,3 @@
+${message}
+
+${date?datetime}
