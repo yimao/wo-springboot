@@ -104,20 +104,25 @@ mudcode.clickhouse.pops:
 #
 # aliyun oss
 oss.endpoint: "oss-cn-beijing.aliyuncs.com"
-oss.accessKeyId: ""
-oss.accessKeySecret: ""
+#oss.accessKeyId: ""
+#oss.accessKeySecret: ""
 oss.bucket: "ctlcode"
 oss.basedir: "hello-world"
 #
 # qcloud cos
 cos.region: "ap-beijing"
-cos.accessKeyId: ""
-cos.accessKeySecret: ""
+#cos.accessKeyId: ""
+#cos.accessKeySecret: ""
 cos.bucket: "ctlcode-1327595278"
 cos.basedir: "hello-world"
 #
 # minio
 minio.endpoint: "http://10.1.2.36:9000"
-minio.accessKeyId: ""
-minio.accessKeySecret: ""
+#minio.accessKeyId: ""
+#minio.accessKeySecret: ""
 minio.bucket: "hello-world"
+spring:
+  data:
+    jdbc:
+      repositories:
+        enabled: false

@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-@ActiveProfiles(profiles = {"test", "debug"})
+@ActiveProfiles(profiles = {"local", "test", "debug"})
 @SpringBootTest
 public class ApplicationTest {
 
