@@ -27,7 +27,7 @@
             https://spring.io/projects/spring-framework/#support
             https://mvnrepository.com/artifact/org.springframework/spring-framework-bom
         -->
-        <spring-framework.version>6.2.0</spring-framework.version>
+        <spring-framework.version>6.2.1</spring-framework.version>
         <!--
             https://spring.io/projects/spring-boot#support
             https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-dependencies
