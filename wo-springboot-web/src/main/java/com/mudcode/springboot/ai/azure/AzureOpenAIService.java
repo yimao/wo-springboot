@@ -127,7 +127,7 @@ public class AzureOpenAIService {
         List<ChatRequestMessage> messages = catchUserSession(session);
 
         List<ChatMessageContentItem> contentItems = new ArrayList<>();
-        contentItems.add(new ChatMessageTextContentItem("首先请描述这张图片，然后对图片的信息进行整理总结。"));
+        contentItems.add(new ChatMessageTextContentItem("请详细描述这张图片表达的原始信息，要确保逻辑清晰、内容准确。"));
 
         String base64Img = Base64.getEncoder().encodeToString(jpegImageBytes);
         String imgUrl = "data:image/jpeg;base64," + base64Img;
