@@ -1,11 +1,11 @@
-FROM eclipse-temurin:17.0.7_7-jdk AS builder
+FROM eclipse-temurin:17.0.13_11-jdk AS builder
 WORKDIR /opt/builder
 COPY . .
 RUN --mount=type=cache,target=/root/.m2 \
     ./mvnw clean package -DskipTests
 
 
-FROM eclipse-temurin:17.0.7_7-jre-alpine
+FROM eclipse-temurin:17.0.13_11-jre-alpine
 
 ENV APP_NAME=hello-world
 ENV JAR_FILE=${APP_NAME}-bin.jar
