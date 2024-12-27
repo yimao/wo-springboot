@@ -3,7 +3,10 @@ package com.mudcode.springboot.oss;
 import com.aliyun.oss.ClientBuilderConfiguration;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
+import com.aliyun.oss.common.auth.CredentialsProviderFactory;
+import com.aliyun.oss.common.auth.DefaultCredentialProvider;
 import com.aliyun.oss.common.comm.Protocol;
+import com.aliyun.oss.common.comm.SignVersion;
 import com.aliyun.oss.model.GetObjectRequest;
 import com.aliyun.oss.model.OSSObject;
 import com.aliyun.oss.model.PutObjectResult;
@@ -28,6 +31,9 @@ public class OSSService {
     @Value("${oss.endpoint}")
     private String endpoint;
 
+    @Value("${oss.region}")
+    private String region;
+
     @Value("${oss.accessKeyId}")
     private String accessKeyId;
 
@@ -44,13 +50,22 @@ public class OSSService {
 
     @PostConstruct
     public void init() {
-        ClientBuilderConfiguration conf = new ClientBuilderConfiguration();
-        conf.setSocketTimeout(10000);
-        conf.setConnectionTimeout(10000);
-        conf.setIdleConnectionTime(10000);
-        conf.setProtocol(Protocol.HTTPS);
+        int timeout = 90_000;
 
-        this.ossClient = new OSSClientBuilder().build(this.endpoint, this.accessKeyId, this.accessKeySecret, conf);
+        ClientBuilderConfiguration clientBuilderConfiguration = new ClientBuilderConfiguration();
+        clientBuilderConfiguration.setSignatureVersion(SignVersion.V4);
+        clientBuilderConfiguration.setProtocol(Protocol.HTTPS);
+        clientBuilderConfiguration.setRequestTimeoutEnabled(true);
+        clientBuilderConfiguration.setRequestTimeout(timeout);
+
+        DefaultCredentialProvider credentialProvider = CredentialsProviderFactory.newDefaultCredentialProvider(this.accessKeyId, this.accessKeySecret);
+
+        this.ossClient = OSSClientBuilder.create()
+                .clientConfiguration(clientBuilderConfiguration)
+                .credentialsProvider(credentialProvider)
+                .endpoint(this.endpoint)
+                .region(this.region)
+                .build();
     }
 
     @PreDestroy
