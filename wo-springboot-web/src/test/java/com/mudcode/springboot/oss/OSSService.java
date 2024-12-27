@@ -10,6 +10,8 @@ import com.aliyun.oss.common.comm.SignVersion;
 import com.aliyun.oss.model.GetObjectRequest;
 import com.aliyun.oss.model.OSSObject;
 import com.aliyun.oss.model.PutObjectResult;
+import com.aliyun.oss.model.UploadFileRequest;
+import com.aliyun.oss.model.UploadFileResult;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import org.apache.commons.io.IOUtils;
@@ -19,6 +21,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
@@ -85,7 +88,15 @@ public class OSSService {
 
     public void upload(String path, byte[] content) {
         PutObjectResult result = ossClient.putObject(bucket, ofBasedir(path), new ByteArrayInputStream(content));
-        logger.debug("success upload oss, path={}, content size={}, etag={}", path, content.length, result.getETag());
+        logger.debug("success upload oss, path={}, etag={}", path, result.getETag());
+    }
+
+    public void upload(String path, File file) throws Throwable {
+        UploadFileRequest uploadFileRequest = new UploadFileRequest(bucket, ofBasedir(path));
+        uploadFileRequest.setUploadFile(file.getAbsolutePath());
+        UploadFileResult result = ossClient.uploadFile(uploadFileRequest);
+        String etag = result.getMultipartUploadResult().getETag();
+        logger.debug("success upload oss, path={}, etag={}", path, etag);
     }
 
     public byte[] download(String path) throws IOException {

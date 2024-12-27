@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -55,4 +56,11 @@ class OSSServiceTest extends ApplicationTest {
         logger.info(url.toString());
     }
 
+    @Test
+    void uploadFile() throws Throwable {
+        String path = "static/robots.txt";
+        URL url = this.getClass().getResource("/static/robots.txt");
+        File file = new File(Objects.requireNonNull(url).getFile());
+        ossService.upload(path, file);
+    }
 }
