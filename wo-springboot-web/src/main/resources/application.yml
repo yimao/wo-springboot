@@ -1,37 +1,29 @@
-#debug: true
-spring.profiles.active: debug
-#
-# application
-spring.application.name: hello-world
 #
 # server
 # https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html#application-properties.server.server.tomcat.threads.max
-server.port: 8080
-server.servlet.context-path: /
-server.tomcat.basedir: tomcat
-server.tomcat.threads.max: 200
-server.tomcat.max-connections: 8192
-server.tomcat.max-http-form-post-size: 10MB
-server.tomcat.max-swallow-size: 10MB
-server.tomcat.mbeanregistry.enabled: true
-server.tomcat.accesslog.enabled: true
-server.tomcat.accesslog.directory: logs
-server.tomcat.accesslog.max-days: 7
-# org.apache.catalina.valves.Constants.AccessLog
-server.tomcat.accesslog.pattern: "%{X-Forwarded-For}i %h %l %u %t \"%r\" %s %b \"%{Referer}i\" \"%{User-Agent}i\""
-server.tomcat.remoteip.host-header: X-Forwarded-Host
-server.tomcat.remoteip.port-header: X-Forwarded-Port
-server.tomcat.remoteip.remote-ip-header: X-Forwarded-For
-#server.tomcat.remoteip.protocol-header-https-value: https
-server.tomcat.remoteip.protocol-header: X-Forwarded-Proto
-# spring servlet file upload
-spring.servlet.multipart.max-file-size: 200MB
-spring.servlet.multipart.max-request-size: 200MB
-# spring mvc
-spring.mvc.contentnegotiation.parameter-name: format
-spring.mvc.contentnegotiation.favor-parameter: true
-# json write-dates-as-timestamps
-spring.jackson.serialization.write-dates-as-timestamps: true
+server:
+  port: 8080
+  servlet:
+    context-path: /
+  tomcat:
+    accesslog:
+      directory: logs
+      enabled: true
+      max-days: 7
+      pattern: '%{X-Forwarded-For}i %h %l %u %t "%r" %s %b "%{Referer}i" "%{User-Agent}i"'
+    basedir: tomcat
+    max-connections: 8192
+    max-http-form-post-size: 10MB
+    max-swallow-size: 10MB
+    mbeanregistry:
+      enabled: true
+    remoteip:
+      host-header: X-Forwarded-Host
+      port-header: X-Forwarded-Port
+      protocol-header: X-Forwarded-Proto
+      remote-ip-header: X-Forwarded-For
+    threads:
+      max: 200
 #
 # actuator
 #
@@ -63,36 +55,56 @@ management:
           - health
           - info
           - prometheus
-
 #
-# spring thymeleaf
-spring.thymeleaf.enabled: true
-spring.thymeleaf.prefix: classpath:/templates/
-spring.thymeleaf.suffix: .html
-spring.thymeleaf.encoding: UTF-8
-# spring freemarker
-spring.freemarker.enabled: false
-spring.freemarker.template-loader-path: classpath:/freemarker/
-spring.freemarker.suffix: .ftl
-spring.freemarker.charset: UTF-8
-spring.freemarker.content-type: text/plain
-#
-# spring security
-spring.security.user.name: admin
-spring.security.user.password: "{bcrypt}$2y$05$ThCznak4WVfGXBqLIoO1IenzRCVsbazv.hRIfVXE6hcLxVOOcNX9e"
-spring.security.ignored-url: /,/index.html,/robots.txt,/error,/actuator/**,/captcha.jpg,/wechat,/wechat/**
+# spring
+spring:
+  application:
+    name: hello-world
+  profiles:
+    active: debug
+  thymeleaf:
+    enabled: true
+    encoding: UTF-8
+    prefix: classpath:/templates/
+    suffix: .html
+  freemarker:
+    charset: UTF-8
+    content-type: text/plain
+    enabled: false
+    suffix: .ftl
+    template-loader-path: classpath:/freemarker/
+  jackson:
+    serialization:
+      write-dates-as-timestamps: true
+  mvc:
+    contentnegotiation:
+      favor-parameter: true
+      parameter-name: format
+  servlet:
+    multipart:
+      max-file-size: 200MB
+      max-request-size: 200MB
+  security:
+    ignored-url: /,/index.html,/robots.txt,/error,/actuator/**,/captcha.jpg,/wechat,/wechat/**
+    user:
+      name: admin
+      password: '{bcrypt}$2y$05$ThCznak4WVfGXBqLIoO1IenzRCVsbazv.hRIfVXE6hcLxVOOcNX9e'
 #
 # log
-logging.file.name: ./logs/${spring.application.name}.log
-logging.file.access-name: ./logs/${spring.application.name}-access.log
-logging.logback.rollingpolicy.file-name-pattern: ${logging.file.name}.%d{yyyyMMdd}.%i
-logging.logback.rollingpolicy.clean-history-on-start: true
-logging.logback.rollingpolicy.max-file-size: 100MB
-logging.logback.rollingpolicy.max-history: 7
-logging.logback.rollingpolicy.total-size-cap: 10GB
-logging.pattern.correlation: "[%X{X-REQUEST-ID:--}] "
-# log level
-logging.level.root: info
-logging.level.access: trace
-logging.level.com.mudcode: debug
-
+logging:
+  file:
+    access-name: ./logs/${spring.application.name}-access.log
+    name: ./logs/${spring.application.name}.log
+  logback:
+    rollingpolicy:
+      clean-history-on-start: true
+      file-name-pattern: ${logging.file.name}.%d{yyyyMMdd}.%i
+      max-file-size: 100MB
+      max-history: 7
+      total-size-cap: 10GB
+  pattern:
+    correlation: '[%X{X-REQUEST-ID:--}] '
+  level:
+    root: info
+    access: trace
+    com.mudcode: debug
