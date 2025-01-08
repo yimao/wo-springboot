@@ -6,7 +6,7 @@ spring.application.name: hello-world
 #
 # server
 # https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html#application-properties.server.server.tomcat.threads.max
-server.port: 18080
+server.port: 8080
 server.servlet.context-path: /
 server.tomcat.basedir: tomcat
 server.tomcat.threads.max: 200
@@ -47,14 +47,15 @@ management:
       enabled: true
   endpoint:
     health:
-      enabled: true
       show-details: always
+      access: read_only
     info:
-      enabled: true
+      access: read_only
     prometheus:
-      enabled: true
+      access: read_only
   endpoints:
-    enabled-by-default: false
+    access:
+      default: read_only
     web:
       base-path: /actuator
       exposure:
@@ -62,6 +63,7 @@ management:
           - health
           - info
           - prometheus
+
 #
 # spring thymeleaf
 spring.thymeleaf.enabled: true
