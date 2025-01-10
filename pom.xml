@@ -42,7 +42,7 @@
         <httpclient5.version>5.4.1</httpclient5.version>
 
         <grpc-java.version>1.69.0</grpc-java.version>
-        <protobuf-java.version>4.29.2</protobuf-java.version>
+        <protobuf-java.version>4.29.3</protobuf-java.version>
 
         <spring-javaformat-maven-plugin.version>0.0.43</spring-javaformat-maven-plugin.version>
     </properties>
