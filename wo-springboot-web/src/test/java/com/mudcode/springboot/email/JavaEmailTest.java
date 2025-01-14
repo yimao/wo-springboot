@@ -20,12 +20,11 @@ public class JavaEmailTest {
 
         String host = "smtpdm.aliyun.com";
         int port = 465;
-        String username = "yimao@mail.mudcode.com";
+        String username = "yimao@mail.ctlcode.com";
         String password = "64Wpzrpm5FXezrpq";
 
-        String toAddress = "guodongxu@126.com";
-        // String message = UUID.randomUUID().toString();
-        byte[] bytes = new byte[8192];
+        String toAddress = "ai@llmcaller.com";
+        byte[] bytes = new byte[2048];
         Random random = new SecureRandom();
         random.nextBytes(bytes);
         String message = Base64.getEncoder().encodeToString(bytes);
