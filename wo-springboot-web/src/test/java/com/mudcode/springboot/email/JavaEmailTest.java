@@ -21,7 +21,7 @@ public class JavaEmailTest {
         String host = "smtpdm.aliyun.com";
         int port = 465;
         String username = "yimao@mail.ctlcode.com";
-        String password = "64Wpzrpm5FXezrpq";
+        String password = "";
 
         String toAddress = "ai@llmcaller.com";
         byte[] bytes = new byte[2048];

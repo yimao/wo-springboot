@@ -16,12 +16,11 @@ public class EmailServiceTest extends ApplicationTest {
 
     @Test
     public void send() throws Exception {
-        // String message = UUID.randomUUID().toString();
-        byte[] bytes = new byte[8192];
+        byte[] bytes = new byte[2048];
         Random random = new SecureRandom();
         random.nextBytes(bytes);
-        String message = Base64.getEncoder().encodeToString(bytes);
-        emailService.send("guodongxu@126.com", DigestUtil.sha256Hex(bytes), message);
+        String message = Base64.getMimeEncoder().encodeToString(bytes);
+        emailService.send("ai@llmcaller.com", DigestUtil.sha256Hex(bytes), message);
     }
 
 }
